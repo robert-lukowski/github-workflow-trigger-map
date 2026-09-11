@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+      - develop
+
+permissions:
+  contents: read
+
+jobs:
+  basic-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Display environment information
+        run: |
+          echo "Running CI checks"
+          echo "Runner OS: $RUNNER_OS"
+          echo "Event: $GITHUB_EVENT_NAME"
+
+  reusable-checks:
+    uses: ./.github/workflows/reusable-checks.yml
+    with:
+      check-label: ci

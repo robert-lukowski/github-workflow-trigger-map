@@ -1,0 +1,22 @@
+name: Post-CI Validation
+
+on:
+  workflow_run:
+    workflows:
+      - CI
+    types:
+      - completed
+
+permissions:
+  contents: read
+
+jobs:
+  report-ci-result:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Display completed workflow information
+        run: |
+          echo "CI completed successfully"
+          echo "Source branch: ${{ github.event.workflow_run.head_branch }}"
+          echo "Source commit: ${{ github.event.workflow_run.head_sha }}"

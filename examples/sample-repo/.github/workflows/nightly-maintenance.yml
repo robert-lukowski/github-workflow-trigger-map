@@ -1,0 +1,19 @@
+name: Nightly Maintenance
+
+on:
+  schedule:
+    - cron: "30 2 * * *"
+
+permissions:
+  contents: read
+
+jobs:
+  display-scheduled-context:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Display schedule information
+        run: |
+          echo "Running scheduled maintenance checks"
+          echo "UTC time: $(date -u)"

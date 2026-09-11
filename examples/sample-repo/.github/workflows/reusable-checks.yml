@@ -1,0 +1,24 @@
+name: Reusable Checks
+
+on:
+  workflow_call:
+    inputs:
+      check-label:
+        description: Label shown in the workflow log
+        required: false
+        default: reusable
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  display-check-context:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Display reusable workflow context
+        env:
+          CHECK_LABEL: ${{ inputs.check-label }}
+        run: |
+          echo "Running reusable checks for: $CHECK_LABEL"
+          echo "Repository: $GITHUB_REPOSITORY"

@@ -1,0 +1,24 @@
+name: Manual Operation
+
+on:
+  workflow_dispatch:
+    inputs:
+      message:
+        description: Message to display
+        required: false
+        default: Manual workflow started
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  display-input:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Display manual input
+        env:
+          INPUT_MESSAGE: ${{ inputs.message }}
+        run: |
+          echo "Message: $INPUT_MESSAGE"
+          echo "Triggered by: $GITHUB_ACTOR"

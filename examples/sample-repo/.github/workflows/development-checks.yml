@@ -1,0 +1,21 @@
+name: Development Checks
+
+on:
+  push:
+    branches:
+      - develop
+
+permissions:
+  contents: read
+
+jobs:
+  inspect-development-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Display branch information
+        run: |
+          echo "Running development branch checks"
+          echo "Reference: $GITHUB_REF"
+          echo "Commit: $GITHUB_SHA"
